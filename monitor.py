@@ -13,7 +13,7 @@ CPU = 'amd'
 GPU = 'nvidia'
 # GPU = 'amd'
 
-INTERVAL = 1 #In hours
+INTERVAL = 1 #In minutes
 
 
 def getGPUTemp():
@@ -100,12 +100,13 @@ def check(info):
 if __name__ == "__main__":
 	info = getGPUTemp()
 	for i in info:
+		print("\n==============================================")
 		print(f"GPU Name: {i['Name']}\nGPU Temp: {i['Temp']}")
 
 	status = check(info)
 
 	sent = sendMessage(1, content=status)
 
-	time.sleep(INTERVAL*60*60)
+	time.sleep(INTERVAL*60)
 
 	# sent = sendMessage(lastSent=1,content=[{"Name":"test gtx 1111", "Temp":"78", "Status":"Attention"},{"Name":"test gtx 2222", "Temp":"78", "Status":"Attention"}])
