@@ -59,16 +59,16 @@ def getGPUTemp():
 
 
 			if GPU=='amd':
-				idstring_gpu = "/amdgpu/0/temperature"
+				idstring_gpu = "/amdgpu/%d/temperature"
 			else:
-				idstring_gpu = "/nvidiagpu/0/temperature"
+				idstring_gpu = "/nvidiagpu/%d/temperature"
 
 			# if idstring in str(c.Hardware[0].Sensors[a].Identifier):
 			#     print(c.Hardware[0].Sensors[a].get_Value())
 			#     c.Hardware[0].Update()
 
 
-			if idstring_gpu in str(c.Hardware[i].Sensors[a].Identifier):
+			if idstring_gpu%(i-1) in str(c.Hardware[i].Sensors[a].Identifier):
 				gpu_temp = str(c.Hardware[i].Sensors[a].get_Value())
 				break
 
@@ -86,9 +86,9 @@ def check(info):
 
 		if float(curr_temp) < 60:
 			curr_status = {"Name":curr_name, "Temp":curr_temp, "Status": "Great"}
-		if float(curr_temp) >= 60 and int(curr_temp) < 68:
+		if float(curr_temp) >= 60 and float(curr_temp) < 68:
 			curr_status = {"Name":curr_name, "Temp":curr_temp, "Status": "Normal"}
-		if float(curr_temp) >= 68 and int(curr_temp) < 80:
+		if float(curr_temp) >= 68 and float(curr_temp) < 80:
 			curr_status = {"Name":curr_name, "Temp":curr_temp, "Status": "Attention"}
 		if float(curr_temp) >= 80:
 			curr_status = {"Name":curr_name, "Temp":curr_temp, "Status": "Critical"}
