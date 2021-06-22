@@ -98,15 +98,16 @@ def check(info):
 
 
 if __name__ == "__main__":
-	info = getGPUTemp()
-	for i in info:
+	while 1:
+		info = getGPUTemp()
 		print("\n==============================================")
-		print(f"GPU Name: {i['Name']}\nGPU Temp: {i['Temp']}")
+		for i in info:
+			print(f"GPU Name: {i['Name']}\nGPU Temp: {i['Temp']}")
 
-	status = check(info)
+		status = check(info)
 
-	sent = sendMessage(1, content=status)
+		sent = sendMessage(1, content=status)
 
-	time.sleep(INTERVAL*60)
+		time.sleep(INTERVAL*60)
 
 	# sent = sendMessage(lastSent=1,content=[{"Name":"test gtx 1111", "Temp":"78", "Status":"Attention"},{"Name":"test gtx 2222", "Temp":"78", "Status":"Attention"}])
